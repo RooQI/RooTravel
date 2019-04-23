@@ -25,9 +25,4 @@ steps:
   inputs:
     contents: '**/*.apk'
     targetFolder: '$(build.artifactStagingDirectory)'
-
 - task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)/app/build/outputs/'
-    artifactName: 'apk-files'
-    artifactType: 'container'

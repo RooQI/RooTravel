@@ -7,11 +7,20 @@ pool:
   vmImage: 'macOS-10.13'
 
 steps:
-- task: Gradle@2
+- task: NodeTool@0
   inputs:
-    workingDirectory: 'RooTravel/android'
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug'
+    versionSpec: '9.7.1'
+  displayName: 'Install Node'
+- script: npm install
+  displayName: 'Install dependencies'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.apk'
+    targetFolder: '$(build.artifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(build.artifactStagingDirectory)/app/build/outputs/'
+    artifactName: 'apk-files'
+    artifactType: 'container'

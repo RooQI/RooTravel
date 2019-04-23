@@ -14,13 +14,7 @@ steps:
 - script: npm install
   displayName: 'Install dependencies'
 
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(build.artifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)/app/build/outputs/'
-    artifactName: 'apk-files'
-    artifactType: 'container'
+- script: |
+    npm ci
+    npm run build-release
+  displayName: 'npm install and build'

@@ -11,6 +11,7 @@ steps:
   inputs:
     versionSpec: '9.7.1'
   displayName: 'Install Node'
+
 - script: npm install
   displayName: 'Install dependencies'
 

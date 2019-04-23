@@ -21,6 +21,15 @@ steps:
     ./gradlew assembleRelease
   displayName: 'Build Android'
 
+- task: AndroidSigning@3
+  inputs:
+    files: '**/*.apk'
+    keystoreFile: 'AndroidApp.keystore'
+    keystorePass: '$(keystore-password)'
+    keystoreAlias: '$(key-alias)'
+    keyPass: '$(key-password)'
+    zipalign: true
+
 - task: CopyFiles@2
   inputs:
     contents: '**/*.apk'
